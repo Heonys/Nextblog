@@ -11,11 +11,11 @@ type Props = {
 };
 
 const PostPage = async ({ params: { slug } }: Props) => {
-  const { date, description, path, title, content } = await getFileName(slug);
-  const posts = await getAllPosts();
+  const post = await getFileName(slug);
+  const { path, prev, next } = post;
 
   return (
-    <article className="m-4 overflow-hidden rounded-2xl bg-gray-100 shadow-lg">
+    <article className="m-4 overflow-hidden rounded-2xl bg-gray-100 shadow-lg ">
       <Image
         className="h-1/5 max-h-[500px] w-full"
         src={`/images/posts/${path}.png`}
@@ -23,16 +23,10 @@ const PostPage = async ({ params: { slug } }: Props) => {
         width={760}
         height={420}
       ></Image>
-      <section className="flex flex-col p-4">
-        {/* <div className="flex items-center self-end text-sky-600">
-          <AiTwotoneCalendar />
-          <p className="ml-2 font-semibold">{date.toString()}</p>
-        </div>
-        <h1 className="text-4xl font-bold">{title}</h1>
-        <p className="text-xl font-bold">{description}</p>
-        <div className="mb-8 mt-4 w-44 border-2 border-sky-600"></div>
-        <MarkdownViewer contents={content} /> */}
-        <NextPostCard path={path} posts={posts} />
+      <PostContents post={post} />
+      <section className="flex shadow-md">
+        {prev && <NextPostCard post={prev} type="prev" />}
+        {next && <NextPostCard post={next} type="next" />}
       </section>
     </article>
   );

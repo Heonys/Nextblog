@@ -3,36 +3,38 @@ import { getAllPosts } from "@/service/posts";
 import type { Post } from "@/service/posts";
 import Image from "next/image";
 import Link from "next/link";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
-const NextPostCard = ({ path, posts }: { path: string; posts: Post[] }) => {
-  const currentIndex = posts.findIndex((value) => value.path === path);
+type Props = {
+  post: Post;
+  type: "next" | "prev";
+};
 
-  const prevPost = posts[currentIndex - 1] || posts[0];
-  const nextPost = posts[currentIndex + 1] || posts[posts.length - 1];
+const ICON_CLASS =
+  "m-4 text-5xl text-yellow-300 transition-all group-hover:text-6xl";
 
+const NextPostCard = ({ post: { path, title, description }, type }: Props) => {
   return (
-    <>
-      {currentIndex === 0 || currentIndex === posts.length - 1 ? (
-        currentIndex === 0 ? (
-          <Link href={`/posts/${nextPost.path}`}>
-            <Image src={`/images/posts/${nextPost.path}.png`} alt="" width={500} height={250} />
-          </Link>
-        ) : (
-          <Link href={`/posts/${prevPost.path}`}>
-            <Image src={`/images/posts/${prevPost.path}.png`} alt="" width={500} height={250} />
-          </Link>
-        )
-      ) : (
-        <div className="flex">
-          <Link href={`/posts/${prevPost.path}`}>
-            <Image src={`/images/posts/${prevPost.path}.png`} alt="" width={500} height={250} />
-          </Link>
-          <Link href={`/posts/${nextPost.path}`}>
-            <Image src={`/images/posts/${nextPost.path}.png`} alt="" width={500} height={250} />
-          </Link>
+    <Link
+      href={`posts/${path}`}
+      className="group relative max-h-56 w-full bg-black"
+    >
+      <Image
+        src={`/images/posts/${path}.png`}
+        className="w-full opacity-40"
+        alt={title}
+        width={150}
+        height={100}
+      ></Image>
+      <div className="absolute left-1/2 top-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 items-center justify-around px-8 text-white ">
+        {type === "prev" && <FaArrowLeft className={ICON_CLASS} />}
+        <div className="w-full text-center">
+          <h3 className="text-3xl font-bold">{title}</h3>
+          <p className=" font-bold">{description}</p>
         </div>
-      )}
-    </>
+        {type === "next" && <FaArrowRight className={ICON_CLASS} />}
+      </div>
+    </Link>
   );
 };
 
