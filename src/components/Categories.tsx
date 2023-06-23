@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 import React from "react";
 
 type Porps = {
@@ -10,7 +10,9 @@ type Porps = {
 const Category = ({ categories, selected, onClick }: Porps) => {
   return (
     <section className="p-4 text-center">
-      <h2 className="mb-2 border-b border-sky-500 text-lg font-bold">Category</h2>
+      <h2 className="mb-2 border-b border-sky-500 text-lg font-bold">
+        Category
+      </h2>
       <ul>
         {categories.map((category) => (
           <li
