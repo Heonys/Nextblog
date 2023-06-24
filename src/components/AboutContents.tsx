@@ -2,7 +2,7 @@ import React from "react";
 
 const AboutContents = () => {
   return (
-    <article className="mx-auto mt-3 flex w-[80%] flex-col space-y-3  bg-[#ddd] py-4 text-center">
+    <article className="m-8 mx-auto flex w-[80%] flex-col space-y-3 bg-gray-100  p-8 text-center  shadow-lg">
       <div>
         <h2 className="text-xl font-bold">Who Am I? </h2>
         <h3 className="text-sm font-semibold"> 프론트엔드 개발자 </h3>

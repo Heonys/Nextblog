@@ -3,12 +3,20 @@ import { getFileName, getAllPosts } from "@/service/posts";
 import Image from "next/image";
 import NextPostCard from "@/components/NextPostCard";
 import PostContents from "@/components/PostContents";
+import { Metadata } from "next";
 
 type Props = {
   params: {
     slug: string;
   };
 };
+
+export async function generateMetadata({
+  params: { slug },
+}: Props): Promise<Metadata> {
+  const { title, description } = await getFileName(slug);
+  return { title, description };
+}
 
 const PostPage = async ({ params: { slug } }: Props) => {
   const post = await getFileName(slug);
