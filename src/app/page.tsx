@@ -1,15 +1,13 @@
-import Profile from "@/components/Profile";
+import CarouselPage from "@/components/CarouselPage";
 import FeaturedPost from "@/components/FeaturedPost";
-import CaroucelPost from "@/components/CaroucelPost";
+import Profile from "@/components/Profile";
 
-export default function HomePage() {
+export default function Home() {
   return (
-    <main>
+    <section>
       <Profile />
-      {/* @ts-expect-error Async Server Component */}
       <FeaturedPost />
-      {/* @ts-expect-error Async Server Component */}
-      <CaroucelPost />
-    </main>
+      <CarouselPage />
+    </section>
   );
 }

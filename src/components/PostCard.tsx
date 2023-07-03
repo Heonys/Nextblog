@@ -1,27 +1,38 @@
 import { Post } from "@/service/posts";
-import Image from "next/image";
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
+import Image from "next/image";
 
-const PostCard = ({ post: { title, description, date, category, path } }: { post: Post }) => {
+type Prop = {
+  post: Post;
+};
+
+const PostCard = ({
+  post: { path, title, description, date, category },
+}: Prop) => {
   return (
-    <Link href={`/posts/${path}`}>
-      <article className="overflow-hidden rounded-md shadow-md hover:shadow-xl">
+    <>
+      <Link
+        href={`/posts/${path}`}
+        className="w-full rounded-lg shadow-md hover:shadow-lg "
+      >
         <Image
-          className="w-full"
+          className="w-full object-cover"
           src={`/images/posts/${path}.png`}
           alt={title}
           width={300}
           height={200}
-        ></Image>
-        <div className="flex flex-col items-center p-4">
-          <time className="self-end text-gray-700">{date.toLocaleString()}</time>
-          <h3 className="text-lg font-bold">{title}</h3>
-          <p className="w-full truncate text-center">{description}</p>
-          <span className="my-2 rounded-lg bg-green-100 px-2 text-sm ">{category}</span>
+        />
+        <div className="flex  flex-col items-center p-4">
+          <time className="text-gray-700 self-end">{date.toString()}</time>
+          <h2 className="font-bold">{title}</h2>
+          <h3 className="w-full truncate text-center">{description}</h3>
+          <span className="my-2 rounded-lg bg-green-100 px-2 text-sm">
+            {category}
+          </span>
         </div>
-      </article>
-    </Link>
+      </Link>
+    </>
   );
 };
 
