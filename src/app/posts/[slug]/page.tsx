@@ -10,6 +10,14 @@ type Props = {
   };
 };
 
+export async function generateMetadata({ params: { slug } }: Props) {
+  const { title, description } = await getFileName(slug);
+  return {
+    title,
+    description,
+  };
+}
+
 const PostPage = async ({ params: { slug } }: Props) => {
   const post = await getFileName(slug);
   const { prev, next, path, title } = post;
